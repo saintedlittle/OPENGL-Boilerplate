@@ -11,5 +11,11 @@
   }, {
     "name" : "glew",
     "version>=" : "2.2.0#3"
+  }, {
+    "name" : "freetype-gl",
+    "version>=" : "2022-01-17#2"
+  }, {
+    "name" : "freetype",
+    "version>=" : "2.12.1#3"
   } ]
 }

@@ -12,6 +12,7 @@ void initialize_window();
 void initialize_glew();
 
 void print_service_information();
+void print_fps();
 
 int main() {
 
@@ -26,25 +27,22 @@ int main() {
 
     const float coords[] = {            0.0f,  0.5f,  0.0f,
                                         0.5f, -0.5f,  0.0f,
-                                        -0.5f, -0.5f,  0.0f};
+                                        -0.5f, -0.5f,  0.0f
+    };
 
     struct triangle my_triangle = create_triangle(coords);
     GLuint triangle_shader = load_shader("triangle");
 
     while(!glfwWindowShouldClose(window)) {
+
+        if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_ESCAPE)) {
+            glfwSetWindowShouldClose(window, 1);
+        }
+
         // wipe the drawing surface clear
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        double previous_seconds = glfwGetTime();
-        static int frame_count = 1;
-        double current_seconds = glfwGetTime();
-        double elapsed_seconds = current_seconds - previous_seconds;
-        double fps = (double)frame_count / elapsed_seconds;
-
-        printf("fps: %.2f\n", fps);
-
-        frame_count++;
-
+        
+        print_fps();
 
         glUseProgram(triangle_shader);
 
@@ -56,9 +54,6 @@ int main() {
         // update other events like input handling
         glfwSwapBuffers(window);
         glfwPollEvents();
-        if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_ESCAPE)) {
-            glfwSetWindowShouldClose(window, 1);
-        }
 
     }
 
@@ -74,6 +69,10 @@ void initialize_window() {
         exit(EXIT_FAILURE);
     }
 
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
     window = glfwCreateWindow(640, 480, "Hello Triangle", NULL, NULL);
     if (!window) {
         fprintf(stderr, "ERROR: could not open window with GLFW3\n");
@@ -82,7 +81,6 @@ void initialize_window() {
     }
 
     glfwMakeContextCurrent(window);
-    glfwWindowHint(GLFW_SAMPLES, 4);
 
 }
 
@@ -103,4 +101,16 @@ void print_service_information() {
     const GLubyte* version = glGetString(GL_VERSION); // version as a string
     printf("Renderer: %s\n", renderer);
     printf("OpenGL version supported %s\n", version);
+}
+
+void print_fps() {
+    double previous_seconds = glfwGetTime();
+    static int frame_count = 1;
+    double current_seconds = glfwGetTime();
+    double elapsed_seconds = current_seconds - previous_seconds;
+    double fps = (double)frame_count / elapsed_seconds;
+
+    printf("fps: %.2f\n", fps);
+
+    frame_count++;
 }
