@@ -1,0 +1,15 @@
+{
+  "name" : "education-opengl",
+  "version-string" : "1.0.0",
+  "builtin-baseline" : "a293ce5897b839da7c22fbb2dc07943e3646f58a",
+  "dependencies" : [ {
+    "name" : "glfw3",
+    "version>=" : "3.3.8#2"
+  }, {
+    "name" : "glad",
+    "version>=" : "0.1.36"
+  }, {
+    "name" : "glew",
+    "version>=" : "2.2.0#3"
+  } ]
+}
