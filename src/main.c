@@ -1,7 +1,7 @@
 #include "GL/glew.h" // include GLEW and new version of GL on Windows
 #include "GLFW/glfw3.h" // GLFW helper library
-#include "objects/triangle.h"
-#include "shaders/shader_manager.h"
+#include "objects/triangle/triangle.h"
+#include "draw/draw_manager.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,14 +14,18 @@ void initialize_glew();
 void print_service_information();
 void print_fps();
 
-int main() {
+static double previous_seconds;
 
+int main() {
+    previous_seconds = glfwGetTime();
     /* INIT BLOCK */
 
     initialize_window();
     initialize_glew();
 
     print_service_information();
+
+    initialize_shaders();
 
     /* OTHER STUFF GOES HERE NEXT */
 
@@ -31,7 +35,9 @@ int main() {
     };
 
     struct triangle my_triangle = create_triangle(coords);
-    GLuint triangle_shader = load_shader("triangle");
+
+    struct point my_point = create_point(2, 0);
+    struct point another_point = create_point(4, 0);
 
     while(!glfwWindowShouldClose(window)) {
 
@@ -41,16 +47,16 @@ int main() {
 
         // wipe the drawing surface clear
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        
+
         print_fps();
 
-        glUseProgram(triangle_shader);
+        draw_triangle(my_triangle);
 
-        glBindVertexArray(my_triangle.vao);
+        draw_point(my_point);
+        draw_point(another_point);
 
-        // draw points 0-3 from the currently bound VAO with current in-use shader
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-
+        draw_line(my_point, another_point);
+        
         // update other events like input handling
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -100,17 +106,20 @@ void print_service_information() {
     const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
     const GLubyte* version = glGetString(GL_VERSION); // version as a string
     printf("Renderer: %s\n", renderer);
-    printf("OpenGL version supported %s\n", version);
+    printf("OpenGL version supported %s\n\n", version);
 }
 
 void print_fps() {
-    double previous_seconds = glfwGetTime();
     static int frame_count = 1;
     double current_seconds = glfwGetTime();
     double elapsed_seconds = current_seconds - previous_seconds;
+
     double fps = (double)frame_count / elapsed_seconds;
 
-    printf("fps: %.2f\n", fps);
+    if (elapsed_seconds > 0.25)
+        printf("fps: %.2f\n", fps);
+
+    previous_seconds = current_seconds;
 
     frame_count++;
 }

@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 23)
 find_package(GLEW REQUIRED)
 find_package(glfw3 CONFIG REQUIRED)
 
-add_executable(education_opengl src/main.c src/objects/triangle.c src/objects/triangle.h src/shaders/shader_manager.c src/shaders/shader_manager.h src/utils/string_utils.h)
+add_executable(education_opengl src/main.c src/objects/triangle/triangle.c src/objects/triangle/triangle.h src/shaders/shader_manager.c src/shaders/shader_manager.h src/utils/string_utils.h src/draw/draw_manager.c src/draw/draw_manager.h src/objects/point/point.c src/objects/point/point.h src/objects/line/line.c src/objects/line/line.h)
 
 target_link_libraries(education_opengl PRIVATE glfw)
 target_link_libraries(education_opengl PRIVATE GLEW::GLEW)

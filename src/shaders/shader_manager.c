@@ -15,14 +15,6 @@ GLuint load_shader(char* shader_name) {
     return create_shader_program_from_files(vertex_filename, fragment_filename);;
 }
 
-void print_shader_info_log(GLuint shader_index) {
-    int max_length = 2048;
-    int actual_length = 0;
-    char shader_log[2048];
-    glGetShaderInfoLog(shader_index, max_length, &actual_length, shader_log);
-    printf("shader info log for GL index %u:\n%s\n", shader_index, shader_log);
-}
-
 void print_programme_info_log(GLuint programme) {
     int max_length = 2048;
     int actual_length = 0;
@@ -35,7 +27,7 @@ GLuint create_shader_program_from_files(const char* vertex_shader_filename, cons
 
     assert( vertex_shader_filename && fragment_shader_filename );
 
-    printf( "loading shader from files `%s` and `%s`\n", vertex_shader_filename,
+    printf( "\nloading shader from files `%s` and `%s`\n", vertex_shader_filename,
             fragment_shader_filename );
 
     char vs_shader_str[MAX_SHADER_SZ];

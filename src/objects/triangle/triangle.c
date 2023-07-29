@@ -5,7 +5,7 @@
 #include <vcruntime.h>
 #include "triangle.h"
 
-void init_triangle(struct triangle *triangle) {
+static void init_triangle(struct triangle *triangle) {
     glGenBuffers(1, &triangle->vbo);
     glBindBuffer(GL_ARRAY_BUFFER, triangle->vbo);
     glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), triangle->points, GL_STATIC_DRAW);
