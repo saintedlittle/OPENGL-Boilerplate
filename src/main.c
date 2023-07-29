@@ -17,6 +17,17 @@ void print_fps();
 
 static double previous_seconds;
 
+struct windowInformation {
+    int width;
+    int height;
+
+    char* title;
+} information = {
+        640,
+        480,
+        "OpenGL project"
+};
+
 int main() {
     previous_seconds = glfwGetTime();
     /* INIT BLOCK */
@@ -81,7 +92,7 @@ void initialize_window() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    window = glfwCreateWindow(640, 480, "Hello Triangle", NULL, NULL);
+    window = glfwCreateWindow(information.width, information.height, information.title, NULL, NULL);
     if (!window) {
         gl_log_err("ERROR: could not open window with GLFW3\n");
         glfwTerminate();
