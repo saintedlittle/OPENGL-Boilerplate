@@ -52,6 +52,8 @@ int main() {
     struct point my_point = create_point(2, 0);
     struct point another_point = create_point(4, 0);
 
+    struct line myLine = create_line(my_point, another_point);
+
     while(!glfwWindowShouldClose(window)) {
 
         if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_ESCAPE)) {
@@ -68,7 +70,7 @@ int main() {
         draw_point(my_point);
         draw_point(another_point);
 
-        draw_line(my_point, another_point);
+        draw_line(myLine);
 
         // update other events like input handling
         glfwSwapBuffers(window);

@@ -5,7 +5,7 @@
 #include <vcruntime_string.h>
 #include "line.h"
 
-static void init_point(struct line *line) {
+static void init_line(struct line *line) {
     glGenBuffers(1, &line->vbo);
     glBindBuffer(GL_ARRAY_BUFFER, line->vbo);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float), line->vertices, GL_STATIC_DRAW);
@@ -32,7 +32,7 @@ struct line create_line(struct point first, struct point second) {
 
     memcpy(lineObj.vertices, vertices, sizeof(vertices));
 
-    init_point(&lineObj);
+    init_line(&lineObj);
 
     return lineObj;
 }

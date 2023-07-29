@@ -20,17 +20,17 @@ void draw_point(struct point my_point) {
     glBindVertexArray(my_point.vao);
 
     // draw coords 0-3 from the currently bound VAO with current in-use shader
-    glDrawArrays(GL_POINTS, 0, 3);
+    glDrawArrays(GL_POINTS, 0, 2);
+
 }
 
-void draw_line(struct point first, struct point second) {
+void draw_line(struct line myLine) {
     glUseProgram(line_shader);
-
-    struct line myLine = create_line(first, second);
 
     glBindVertexArray(myLine.vao);
 
-    glDrawArrays(GL_LINES, 0, 3);
+    glDrawArrays(GL_LINES, 0, 2);
+
 }
 
 void draw_triangle(struct triangle my_triangle) {

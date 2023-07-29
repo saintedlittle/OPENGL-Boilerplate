@@ -17,7 +17,7 @@ void initialize_shaders();
 
 void draw_point(struct point my_point);
 
-void draw_line(struct point first, struct point second);
+void draw_line(struct line myLine);
 
 void draw_triangle(struct triangle my_triangle);
 
