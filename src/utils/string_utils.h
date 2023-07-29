@@ -8,6 +8,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "../logger/logger.h"
 
 char* sum_string(char* first, char* two) {
     size_t len_shader_name = strlen(first);
@@ -15,7 +16,8 @@ char* sum_string(char* first, char* two) {
 
     char* modified_shader_name = (char*)malloc(len_shader_name + len_additional_line + 1);
     if (!modified_shader_name) {
-        fprintf(stderr, "Memory allocation error!\n");
+        gl_log_err("Memory allocation error!\n");
+
         return NULL;
     }
 

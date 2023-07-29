@@ -2,6 +2,7 @@
 #include "GLFW/glfw3.h" // GLFW helper library
 #include "objects/triangle/triangle.h"
 #include "draw/draw_manager.h"
+#include "logger/logger.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,8 +24,9 @@ int main() {
     initialize_window();
     initialize_glew();
 
-    print_service_information();
+    restart_gl_log();
 
+    print_service_information();
     initialize_shaders();
 
     /* OTHER STUFF GOES HERE NEXT */
@@ -56,7 +58,7 @@ int main() {
         draw_point(another_point);
 
         draw_line(my_point, another_point);
-        
+
         // update other events like input handling
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -71,7 +73,7 @@ int main() {
 void initialize_window() {
     // start GL context and O/S window using the GLFW helper library
     if (!glfwInit()) {
-        fprintf(stderr, "ERROR: could not start GLFW3\n");
+        gl_log_err("ERROR: could not start GLFW3\n");
         exit(EXIT_FAILURE);
     }
 
@@ -81,7 +83,7 @@ void initialize_window() {
 
     window = glfwCreateWindow(640, 480, "Hello Triangle", NULL, NULL);
     if (!window) {
-        fprintf(stderr, "ERROR: could not open window with GLFW3\n");
+        gl_log_err("ERROR: could not open window with GLFW3\n");
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
@@ -105,8 +107,9 @@ void print_service_information() {
     // get version info
     const GLubyte* renderer = glGetString(GL_RENDERER); // get renderer string
     const GLubyte* version = glGetString(GL_VERSION); // version as a string
-    printf("Renderer: %s\n", renderer);
-    printf("OpenGL version supported %s\n\n", version);
+
+    gl_log("Renderer: %s\n", renderer);
+    gl_log("OpenGL version supported %s\n\n", version);
 }
 
 void print_fps() {

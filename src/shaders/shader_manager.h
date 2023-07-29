@@ -2,6 +2,8 @@
 // Created by saintedlittle on 28.07.2023.
 //
 
+#pragma once
+
 #ifndef EDUCATION_OPENGL_SHADER_MANAGER_H
 #define EDUCATION_OPENGL_SHADER_MANAGER_H
 
