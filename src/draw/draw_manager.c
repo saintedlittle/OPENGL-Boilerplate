@@ -63,7 +63,7 @@ void drawFilledSun(struct circle my_circle, int color[3]) {
     int cy = my_circle.cy;
 
     glLoadIdentity();
-    glTranslatef(0, 0, -10);
+    glTranslatef(0, 0, 0);
 
     double radius = my_circle.r;
     //glColor3ub(253, 184, 19);
