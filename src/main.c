@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 
 static GLFWwindow* window;
 
@@ -54,6 +55,11 @@ int main() {
 
     struct line myLine = create_line(my_point, another_point);
 
+    struct circle myCircle = create_circle(0, 0, 0.7, 100);
+
+    int color[3] = {255, 0, 0};
+
+
     while(!glfwWindowShouldClose(window)) {
 
         if (GLFW_PRESS == glfwGetKey(window, GLFW_KEY_ESCAPE)) {
@@ -71,6 +77,11 @@ int main() {
         draw_point(another_point);
 
         draw_line(myLine);
+
+        draw_circle(myCircle);
+
+
+        drawFilledSun(myCircle, color);
 
         // update other events like input handling
         glfwSwapBuffers(window);
