@@ -2,6 +2,8 @@
 // Created by saintedlittle on 28.07.2023.
 //
 
+#pragma once
+
 #ifndef EDUCATION_OPENGL_STRING_UTILS_H
 #define EDUCATION_OPENGL_STRING_UTILS_H
 
@@ -18,7 +20,7 @@
     }
 
 
-char* sum_string(char* first, char* two) {
+static inline char* sum_string(char* first, char* two) {
     size_t len_shader_name = strlen(first);
     size_t len_additional_line = strlen(two);
 
