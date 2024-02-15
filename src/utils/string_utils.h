@@ -10,6 +10,14 @@
 #include <stdio.h>
 #include "../logger/logger.h"
 
+#define OPEN_FILE_AND_CHECK(filename) \
+    FILE *file = fopen(filename, "r"); \
+    if (file == NULL) { \
+        perror("Error opening file"); \
+        exit(EXIT_FAILURE); \
+    }
+
+
 char* sum_string(char* first, char* two) {
     size_t len_shader_name = strlen(first);
     size_t len_additional_line = strlen(two);

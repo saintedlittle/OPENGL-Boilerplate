@@ -30,6 +30,7 @@ struct windowInformation {
 };
 
 int main() {
+
     previous_seconds = glfwGetTime();
     /* INIT BLOCK */
 
